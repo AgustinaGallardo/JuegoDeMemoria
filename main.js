@@ -13,7 +13,7 @@ let tiempoRegresivoId = null;
 //apuntado a documento HTML
 let mostrarMovimientos= document.getElementById('movimientos');
 let mostrarAciertos = document.getElementById('aciertos');
-let mostrarTiempo = document.getElementById('t-restante');
+let mostrarTiempo = document.getElementById('tiempo');
 
 //Funcion que genera numeros aleatorios
 let numeros = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8];
@@ -22,14 +22,14 @@ console.log(numeros);
 
 //funciones
 function contarTiempo(){
-  tiempoRegresivoId =   setInterval(()=>{
-          timer--;       
-          mostrarTiempo.innerHTML = `Tiempo: ${timer} segundos`;
-          if (timer == 0){
-           clearInterval(tiempoRegresivoId);
-           bloquearTarjetas();
-          }
-    }, 1000);
+  tiempoRegresivoId =   setInterval(()=>{                    
+    mostrarTiempo.innerHTML = `Tiempo restante: ${timer} segundos`;
+    timer--;
+    if (timer < 0){
+     clearInterval(tiempoRegresivoId);
+     bloquearTarjetas(numeros);
+    }
+}, 1000,timer);
 }
 function bloquearTarjetas(){
     for(let i = 0; i<=15; i++){
